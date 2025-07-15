@@ -5,6 +5,7 @@ import com.example.studentmanager.dto.StudentDTO;
 import com.example.studentmanager.model.StudentEntity;
 import com.example.studentmanager.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentDTO saveStudent(StudentDTO studentDTO) {
-        StudentEntity entity  = studentConverter.DTOtoEntity(studentDTO);
+        StudentEntity entity = studentConverter.DTOtoEntity(studentDTO);
         StudentEntity savedEntity = studentRepository.save(entity);
         StudentDTO savedDTO = studentConverter.EntitytoDTO(savedEntity);
 
@@ -31,8 +32,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentDTO> getAllStudents() {
         List<StudentEntity> entities = studentRepository.findAll();
-        List<StudentDTO> allStudent=new ArrayList<>();
-        for (StudentEntity se : entities){
+        List<StudentDTO> allStudent = new ArrayList<>();
+        for (StudentEntity se : entities) {
             allStudent.add(studentConverter.EntitytoDTO(se));
         }
 
@@ -73,17 +74,34 @@ public class StudentServiceImpl implements StudentService {
 
 
     @Override
-    public void deleteStudent(Integer id) {
+    public StudentDTO deleteStudent(Integer id) {
+        Optional<StudentEntity> optionalStudent = studentRepository.findById(id);
 
+        if (optionalStudent.isPresent()) {
+            studentRepository.deleteById(id);
+            return studentConverter.EntitytoDTO(optionalStudent.get());
+        } else {
+            throw new RuntimeException("Student not found with id: " + id);
+        }
     }
 
     @Override
     public List<StudentDTO> getAllStudentsSortedById() {
-        return List.of();
+        List<StudentEntity> studentEntities = studentRepository.findAll(Sort.by("id"));
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        for (StudentEntity se : studentEntities) {
+            studentDTOS.add(studentConverter.EntitytoDTO(se));
+        }
+        return studentDTOS;
     }
 
     @Override
     public List<StudentDTO> getAllStudentsSortedByAverage() {
-        return List.of();
+        List<StudentEntity> studentEntities = studentRepository.findAll(Sort.by("average"));
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        for (StudentEntity se : studentEntities) {
+            studentDTOS.add(studentConverter.EntitytoDTO(se));
+        }
+        return studentDTOS;
     }
 }

@@ -13,7 +13,7 @@ public interface StudentService {
 
     StudentDTO updateStudent(Integer id, StudentDTO studentDTO);
 
-    void deleteStudent(Integer id);
+    StudentDTO  deleteStudent(Integer id);
 
     List<StudentDTO> getAllStudentsSortedById();
 
