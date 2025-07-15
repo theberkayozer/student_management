@@ -1,0 +1,89 @@
+package com.example.studentmanager.service;
+
+import com.example.studentmanager.converter.StudentConverter;
+import com.example.studentmanager.dto.StudentDTO;
+import com.example.studentmanager.model.StudentEntity;
+import com.example.studentmanager.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class StudentServiceImpl implements StudentService {
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private StudentConverter studentConverter;
+
+    @Override
+    public StudentDTO saveStudent(StudentDTO studentDTO) {
+        StudentEntity entity  = studentConverter.DTOtoEntity(studentDTO);
+        StudentEntity savedEntity = studentRepository.save(entity);
+        StudentDTO savedDTO = studentConverter.EntitytoDTO(savedEntity);
+
+        return savedDTO;
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudents() {
+        List<StudentEntity> entities = studentRepository.findAll();
+        List<StudentDTO> allStudent=new ArrayList<>();
+        for (StudentEntity se : entities){
+            allStudent.add(studentConverter.EntitytoDTO(se));
+        }
+
+        return allStudent;
+    }
+
+    @Override
+    public StudentDTO getStudentById(Integer id) {
+        Optional<StudentEntity> optionalEntity = studentRepository.findById(id);
+
+        if (optionalEntity.isPresent()) {
+            StudentEntity entity = optionalEntity.get(); // Optional içinden al
+            return studentConverter.EntitytoDTO(entity);  // DTO'ya çevir ve döndür
+        } else {
+            throw new RuntimeException("Student not found with id: " + id);
+        }
+    }
+
+    @Override
+    public StudentDTO updateStudent(Integer id, StudentDTO studentDTO) {
+        Optional<StudentEntity> optionalStudent = studentRepository.findById(id);
+
+        if (optionalStudent.isPresent()) {
+            StudentEntity entityToUpdate = optionalStudent.get();
+
+            // ID'nin değişmediğinden emin olmak için setId yapmıyoruz veya doğrudan DTO’dan gelen id'yi kullanmıyoruz.
+            entityToUpdate.setName(studentDTO.getName());
+            entityToUpdate.setAverage(studentDTO.getAverage());
+            // Diğer alanları güncelle
+
+            StudentEntity updatedEntity = studentRepository.save(entityToUpdate);
+
+            return studentConverter.EntitytoDTO(updatedEntity);
+        } else {
+            throw new RuntimeException("Student not found with id: " + id);
+        }
+    }
+
+
+    @Override
+    public void deleteStudent(Integer id) {
+
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudentsSortedById() {
+        return List.of();
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudentsSortedByAverage() {
+        return List.of();
+    }
+}
