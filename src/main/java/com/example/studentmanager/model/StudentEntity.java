@@ -1,10 +1,7 @@
 package com.example.studentmanager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "STUDENT_TABLE")
@@ -14,7 +11,7 @@ public class StudentEntity {
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 
