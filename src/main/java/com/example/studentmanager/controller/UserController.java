@@ -2,7 +2,6 @@ package com.example.studentmanager.controller;
 
 import com.example.studentmanager.dto.UserDTO;
 import com.example.studentmanager.service.UserService;
-import com.example.studentmanager.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
