@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
         return savedUserDTO;
 
     }
-
     @Override
     public UserDTO login(UserDTO userDTO) {
         UserEntity loginUser = userConverter.userDTOtoEntity(userDTO);
