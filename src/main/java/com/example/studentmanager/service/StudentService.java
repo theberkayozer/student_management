@@ -20,4 +20,9 @@ public interface StudentService {
     List<StudentDTO> getAllStudentsSortedByAverage();
 
 
+    List<StudentDTO> sortedStudentByName();
+
+    List<StudentDTO> sortedStudentByNameWithOrder();
+
+    List<StudentDTO> filterByAverage(Double minAverage);
 }

@@ -9,10 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserDTO {
-    @NotBlank
+    @NotBlank(message = "Email alanı boş olamaz.")
     @Email
     private String email;
-    @Size(min = 6 , message = "Password must include at least 6 characters")
+    @Size(min = 6 , message = "Şifre en az 6 karekter içermelidir.")
+    @NotBlank
     private String password;
 
 }

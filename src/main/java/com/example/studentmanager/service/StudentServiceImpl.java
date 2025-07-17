@@ -104,4 +104,38 @@ public class StudentServiceImpl implements StudentService {
         }
         return studentDTOS;
     }
+
+    @Override
+    public List<StudentDTO> sortedStudentByName() {
+        List<StudentEntity> listedStudentEnt = studentRepository.findAll(Sort.by("name"));
+        List<StudentDTO> listedStudentDTO = new ArrayList<>();
+        for (StudentEntity se : listedStudentEnt) {
+            listedStudentDTO.add(studentConverter.EntitytoDTO(se));
+        }
+        return listedStudentDTO;
+
+
+    }
+
+    public List<StudentDTO> sortedStudentByNameWithOrder() {
+        List<StudentDTO> studentDTOS = sortedStudentByName().reversed();
+        return studentDTOS;
+
+    }
+
+
+    @Override
+    public List<StudentDTO> filterByAverage(Double minAverage) {
+        List<StudentDTO> studentDTOS = getAllStudentsSortedByAverage();
+        List<StudentDTO> filteredStudentList = new ArrayList<>();
+        for (StudentDTO studentDTO : studentDTOS) {
+            if (studentDTO.getAverage() >= minAverage) {
+                filteredStudentList.add(studentDTO);
+            }
+        }
+
+        return filteredStudentList;
+
+
+    }
 }
