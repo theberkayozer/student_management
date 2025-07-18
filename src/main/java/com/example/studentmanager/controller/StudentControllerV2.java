@@ -80,7 +80,7 @@ public class StudentControllerV2 {
     }
 
     @GetMapping("/filter/average/{min}")
-    public ResponseEntity<List<StudentDTO>> filterByMinAverage((@PathVariable("min") double minAverage){
+    public ResponseEntity<List<StudentDTO>> filterByMinAverage(@PathVariable("min") double minAverage){
         List<StudentDTO> filteredList = studentService.filterByAverage(minAverage);
 
         return ResponseEntity.ok(filteredList);

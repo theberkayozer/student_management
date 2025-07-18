@@ -138,4 +138,14 @@ public class StudentServiceImpl implements StudentService {
 
 
     }
+
+    @Override
+    public List<StudentDTO> filterByStudentName(String name) {
+        List<StudentEntity> nameList = studentRepository.findByNameIgnoreCase(name);
+        List<StudentDTO> nameByList = new ArrayList<>();
+        for (StudentEntity se : nameList) {
+            nameByList.add(studentConverter.EntitytoDTO(se));
+        }
+        return nameByList;
+    }
 }
