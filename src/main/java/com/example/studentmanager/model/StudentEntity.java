@@ -3,23 +3,21 @@ package com.example.studentmanager.model;
 import jakarta.persistence.*;
 
 
+
 @Entity
 @Table(name = "STUDENT_TABLE")
 public class StudentEntity {
+
+
+    @Id
+    private Integer id;
+    private String name;
+    private double average;
+
+    private Status status;
     public enum Status {
         PASSED, FAILED
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-
-    private String name;
-
-    private Status status;
-    private double average;
-
     public StudentEntity() {
     }
 
@@ -32,7 +30,7 @@ public class StudentEntity {
         } else status = Status.FAILED;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

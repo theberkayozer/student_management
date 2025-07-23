@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,10 +119,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public List<StudentDTO> sortedStudentByNameWithOrder() {
-        List<StudentDTO> studentDTOS = sortedStudentByName().reversed();
+        List<StudentDTO> studentDTOS = sortedStudentByName(); // önce sıralı liste geliyor
+        Collections.reverse(studentDTOS); // bu listeyi ters çevirir (in-place)
         return studentDTOS;
-
     }
+
 
 
     @Override

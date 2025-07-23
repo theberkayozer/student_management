@@ -2,9 +2,9 @@ package com.example.studentmanager.controller;
 
 import com.example.studentmanager.dto.StudentDTO;
 import com.example.studentmanager.service.StudentService;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +30,7 @@ public class StudentControllerV2 {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<StudentDTO> getStudent(@PathVariable Integer id) {
+    public ResponseEntity<StudentDTO> getStudent(@Parameter(description = "Öğrenci ID'si", example = "1") @PathVariable Integer id) {
         StudentDTO student = studentService.getStudentById(id);
         return ResponseEntity.ok(student);
     }
@@ -80,10 +80,15 @@ public class StudentControllerV2 {
     }
 
     @GetMapping("/filter/average/{min}")
-    public ResponseEntity<List<StudentDTO>> filterByMinAverage(@PathVariable("min") double minAverage){
+    public ResponseEntity<List<StudentDTO>> filterByMinAverage(@PathVariable("min") double minAverage) {
         List<StudentDTO> filteredList = studentService.filterByAverage(minAverage);
 
         return ResponseEntity.ok(filteredList);
     }
+
+
+
+
+
 
 }
