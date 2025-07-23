@@ -27,4 +27,6 @@ public interface StudentService {
     List<StudentDTO> filterByAverage(Double minAverage);
 
     List<StudentDTO> filterByStudentName(String name);
+
+    List<StudentDTO> searchByName(String name);
 }

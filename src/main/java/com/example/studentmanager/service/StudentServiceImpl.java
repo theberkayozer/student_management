@@ -125,7 +125,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-
     @Override
     public List<StudentDTO> filterByAverage(Double minAverage) {
         List<StudentDTO> studentDTOS = getAllStudentsSortedByAverage();
@@ -143,11 +142,27 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentDTO> filterByStudentName(String name) {
-        List<StudentEntity> nameList = studentRepository.findByNameIgnoreCase(name);
+        List<StudentEntity> nameList = studentRepository.findByName(name);
         List<StudentDTO> nameByList = new ArrayList<>();
         for (StudentEntity se : nameList) {
             nameByList.add(studentConverter.EntitytoDTO(se));
         }
         return nameByList;
+    }
+
+    @Override
+    public List<StudentDTO> searchByName(String name) {
+        List<StudentEntity> studentEntities = studentRepository.findByNameContainingIgnoreCase(name);
+        List<StudentDTO> studentDTOList = new ArrayList<>();
+        if (studentEntities.isEmpty()) {
+            throw new RuntimeException("Aranan isimle: " + name + " eşleşen öğrenci bulunamadı");
+
+        } else {
+
+            for (StudentEntity se : studentEntities) {
+                studentDTOList.add(studentConverter.EntitytoDTO(se));
+            }
+        }
+        return studentDTOList;
     }
 }

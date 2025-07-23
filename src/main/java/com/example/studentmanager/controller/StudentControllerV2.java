@@ -80,14 +80,18 @@ public class StudentControllerV2 {
     }
 
     @GetMapping("/filter/average/{min}")
-    public ResponseEntity<List<StudentDTO>> filterByMinAverage(@PathVariable("min") double minAverage) {
-        List<StudentDTO> filteredList = studentService.filterByAverage(minAverage);
+    public ResponseEntity<List<StudentDTO>> filterByMinAverage(@PathVariable double min) {
+        List<StudentDTO> filteredList = studentService.filterByAverage(min);
 
         return ResponseEntity.ok(filteredList);
     }
 
 
-
+    @GetMapping("/findByName/{name}")
+    public ResponseEntity<List<StudentDTO>> searchByName(@PathVariable String name){
+        List<StudentDTO> searchedNames = studentService.searchByName(name);
+        return ResponseEntity.ok(searchedNames);
+    }
 
 
 

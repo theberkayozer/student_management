@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface StudentRepository  extends JpaRepository<StudentEntity, Integer> {
     List<StudentEntity> findByNameIgnoreCase(String name);
+    List<StudentEntity> findByName(String name);
+    List<StudentEntity> findByNameContainingIgnoreCase(String kyeword);
 }
