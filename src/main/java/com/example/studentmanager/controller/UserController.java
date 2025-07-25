@@ -2,11 +2,9 @@ package com.example.studentmanager.controller;
 
 import com.example.studentmanager.dto.UpdatePasswordDTO;
 import com.example.studentmanager.dto.UserDTO;
-import com.example.studentmanager.model.UserEntity;
 import com.example.studentmanager.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.example.studentmanager.repository;
 
-import com.example.studentmanager.model.UserEntity;
+import com.example.studentmanager.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

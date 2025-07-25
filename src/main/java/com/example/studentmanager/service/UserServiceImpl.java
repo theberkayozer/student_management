@@ -2,9 +2,8 @@ package com.example.studentmanager.service;
 
 import com.example.studentmanager.converter.UserConverter;
 import com.example.studentmanager.dto.UserDTO;
-import com.example.studentmanager.model.UserEntity;
+import com.example.studentmanager.entity.UserEntity;
 import com.example.studentmanager.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

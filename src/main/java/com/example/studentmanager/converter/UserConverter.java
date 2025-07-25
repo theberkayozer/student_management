@@ -1,7 +1,7 @@
 package com.example.studentmanager.converter;
 
 import com.example.studentmanager.dto.UserDTO;
-import com.example.studentmanager.model.UserEntity;
+import com.example.studentmanager.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -2,7 +2,7 @@ package com.example.studentmanager.service;
 
 import com.example.studentmanager.converter.StudentConverter;
 import com.example.studentmanager.dto.StudentDTO;
-import com.example.studentmanager.model.StudentEntity;
+import com.example.studentmanager.entity.StudentEntity;
 import com.example.studentmanager.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -63,6 +63,7 @@ public class StudentServiceImpl implements StudentService {
             // ID'nin değişmediğinden emin olmak için setId yapmıyoruz veya doğrudan DTO’dan gelen id'yi kullanmıyoruz.
             entityToUpdate.setName(studentDTO.getName());
             entityToUpdate.setAverage(studentDTO.getAverage());
+            entityToUpdate.setAddresses(
             // Diğer alanları güncelle
 
             StudentEntity updatedEntity = studentRepository.save(entityToUpdate);

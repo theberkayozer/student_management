@@ -6,22 +6,40 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.List;
+
 public class StudentDTO {
 
     public enum Status {
         PASSED, FAILED
     }
+
     @Schema(description = "Öğrencinin sistemdeki ID'si", example = "1")
     private Integer id;
+
     @NotBlank(message = "name cannot be null")
     @Schema(description = "Öğrencinin adı", example = "Ali")
     private String name;
+
     @Min(value = 0)
     @Max(value = 100)
     @Schema(description = "Ortalaması", example = "76.5", minimum = "0", maximum = "100")
     private double average;
+
     @Schema(description = "Durum: PASSED ya da FAILED", example = "PASSED")
     private Status status;
+
+
+    private List<AddressDTO> addresses;
+
+    public List<AddressDTO> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<AddressDTO> addresses) {
+        this.addresses = addresses;
+    }
+
     public StudentDTO() {
     }
 
@@ -30,6 +48,7 @@ public class StudentDTO {
         this.name = name;
         this.average = average;
     }
+
     public Integer getId() {
         return id;
     }
